@@ -33,6 +33,9 @@
 </template>
 
 <script>
+import { remainNewly } from '@/api/log'
+// import util from '@/utils/util'
+import { formatDate } from '@/utils/util'
 export default {
   data() {
     return {
@@ -63,8 +66,8 @@ export default {
       },
       value1: '',
       value2: '',
-      data1: 100,
-      data2: 100
+      data1: 0,
+      data2: 0
     }
   },
   mounted() {
@@ -73,9 +76,19 @@ export default {
   methods: {
     searchOnClick: function() {
       console.log('onClick')
-    },
-    init() {
 
+      var reg = formatDate(this.value1)
+      var active = formatDate(this.value2)
+      // console.log(reg, active)
+      remainNewly(reg, active).then(response => {
+        // console.log(response.data)
+        const data = response.data
+        this.data1 = data.reg_count
+        this.data2 = data.active_count
+      })
+    },
+
+    init() {
     }
   }
 }

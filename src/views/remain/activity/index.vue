@@ -22,18 +22,20 @@
       <el-button type="primary" autofocus plain @click="searchOnClick()" >查询</el-button>
     </div>
     <div style="padding:20px;">
-      <span class="demonstration">注册人数：</span>
+      <span class="demonstration">上次活跃人数：</span>
       <el-tag type="success">{{ data1 }}</el-tag>
     </div>
     <div style="padding:20px;">
-      <span class="demonstration">活跃人数：</span>
+      <span class="demonstration">最近活跃人数：</span>
       <el-tag type="success">{{ data2 }}</el-tag>
     </div>
   </div>
 </template>
 
 <script>
-import { remainNewly } from '@/api/log'
+// import { util } from '@/api/util'
+import { remainActivity } from '@/api/log'
+import { formatDate } from '@/utils/util'
 export default {
   data() {
     return {
@@ -64,7 +66,7 @@ export default {
       },
       value1: '',
       value2: '',
-      data1: 100,
+      data1: 0,
       data2: 0
     }
   },
@@ -74,12 +76,17 @@ export default {
   methods: {
     searchOnClick: function() {
       console.log('onClick')
-      remainNewly(this.value1, this.value2).then(response => {
-        console.log(response.data)
+      var last_active = formatDate(this.value1)
+      var active = formatDate(this.value2)
+      console.log(last_active, active)
+      remainActivity(last_active, active).then(response => {
+        // console.log(response.data)
+        const data = response.data
+        this.data1 = data.last_active_count
+        this.data2 = data.active_count
       })
     },
     init() {
-
     }
   }
 }

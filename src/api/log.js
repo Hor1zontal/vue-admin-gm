@@ -2,22 +2,32 @@ import request from '@/utils/request'
 
 export function remainNewly(register, activity) {
   return request({
-    url: '/remain/newly',
+    url: '/statistic/newly',
     method: 'get',
-    data: {
+    params: {
       reg: register,
-      activity: activity
+      active: activity
     }
   })
 }
 
 export function remainActivity(activity, last_activity) {
   return request({
-    url: '/remain/activity',
+    url: '/statistic/activity',
     method: 'get',
-    data: {
-      activity: activity,
-      last_activity: last_activity
+    params: {
+      login: activity,
+      last_login: last_activity
+    }
+  })
+}
+
+export function dayUserData(day) {
+  return request({
+    url: '/statistic/user',
+    method: 'get',
+    params: {
+      day
     }
   })
 }
