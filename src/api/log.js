@@ -13,7 +13,7 @@ export function remainNewly(register, activity) {
 
 export function remainActivity(activity, last_activity) {
   return request({
-    url: '/remain/newly',
+    url: '/remain/activity',
     method: 'get',
     data: {
       activity: activity,
