@@ -40,9 +40,9 @@ export const constantRouterMap = [
   },
 
   {
-    path: '/remain',
+    path: '/statistics',
     component: Layout,
-    redirect: '/remain/newly',
+    redirect: '/statistics/newly',
     name: 'Remain',
     meta: { title: '留存信息' },
     children: [
@@ -50,17 +50,41 @@ export const constantRouterMap = [
         path: 'newly',
         meta: { title: '新增留存' },
         name: 'Newly',
-        component: () => import('@/views/remain/newly/index')
+        component: () => import('@/views/statistics/newly/index')
       },
       {
         path: 'activity',
         meta: { title: '活跃留存' },
         name: 'Activity',
-        component: () => import('@/views/remain/activity/index')
+        component: () => import('@/views/statistics/activity/index')
+      },
+      {
+        path: 'range',
+        meta: { title: '玩家分布' },
+        name: 'Range',
+        component: () => import('@/views/statistics/range/index')
       }
     ]
   },
 
+  {
+    path: '/operation',
+    component: Layout,
+    redirect: '/operation/notice',
+    name: 'Operation',
+    meta: { title: '运维' },
+    children: [
+      {
+        path: 'notice',
+        meta: { title: '公告' },
+        name: 'Notice',
+        component: () => import('@/views/operation/notice')
+      }
+      // {
+      //   path: ''
+      // }
+    ]
+  },
   // {
   //   path: '/example',
   //   component: Layout,
